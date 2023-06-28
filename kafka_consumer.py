@@ -67,4 +67,4 @@ query = parsed_df.writeStream \
 # Wait for the query to terminate
 query.awaitTermination()
 
-
+print('hello')
