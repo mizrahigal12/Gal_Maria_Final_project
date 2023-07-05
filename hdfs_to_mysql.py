@@ -10,15 +10,18 @@ import pymysql
 
 
 # conection between  spark and kafka
-os.environ[
+'''os.environ[
     "PYSPARK_SUBMIT_ARGS"
 ] = "--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.1 pyspark-shell"
-
+'''
 # Create a SparkSession
+
+    #.config("spark.driver.extraClassPath", "/opt/cloudera/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554/lib/spark/jars/mysql-connector-java.jar") \
+
 spark = SparkSession\
     .builder\
     .appName("JsonLoader")\
-    .config("spark.driver.extraClassPath", "/opt/cloudera/parcels/CDH-6.3.2-1.cdh6.3.2.p0.1605554/lib/spark/jars/mysql-connector.jar") \
+    .config("spark.driver.extraClassPath", "/usr/share/java/mysql-connector-java.jar") \
     .getOrCreate()
 
 # Set HDFS directory path
@@ -99,7 +102,7 @@ def get_current_datetime_israel():
 last_run = datetime.strptime(get_max_timestamp(cnx), '%Y-%m-%d %H:%M:%S')  
 end_datetime = get_current_datetime_israel()
 
-while last_run < end_datetime:
+while last_run <= end_datetime:
     try:
         print('The current last_run:', last_run)
 
