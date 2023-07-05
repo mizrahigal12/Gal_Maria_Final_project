@@ -4,8 +4,7 @@ from datetime import datetime, timedelta
 
 default_args = {
     'start_date': datetime(2023, 1, 1),
-    'retries': 3,
-    'retry_delay': timedelta(minutes=5),
+    'retries': 0
 }
 
 dag = DAG(
